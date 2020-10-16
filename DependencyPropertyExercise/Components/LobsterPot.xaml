@@ -35,7 +35,7 @@
         </Border>
         <Image Source="{StaticResource lobster}" Width="200" Height="350">
             <Image.Clip>
-                <RectangleGeometry x:Name="clippingBounds" />
+                <RectangleGeometry x:Name="clippingBounds" Rect="0, 350, 300, 750"/>
             </Image.Clip>
         </Image>
 

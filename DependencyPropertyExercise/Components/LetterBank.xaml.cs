@@ -16,11 +16,16 @@ namespace DependencyPropertyExercise.Components
     /// <summary>
     /// Interaction logic for LetterBank.xaml
     /// </summary>
-    public partial class LetterBank : UserControl
+    public partial class LetterBank : WrapPanel
     {
         public LetterBank()
         {
             InitializeComponent();
+            for (char c = 'A'; c <= 'Z'; c++)
+            {
+                Children.Add(new LetterButton() { Letter = c});
+            }   
         }
+
     }
 }

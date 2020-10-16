@@ -1,6 +1,7 @@
 ﻿using CustomDependencyPropertyExample.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,33 @@ namespace DependencyPropertyExercise.Components
         public Game()
         {
             InitializeComponent();
+            var gvm = new GameViewModel();
+            gvm.PropertyChanged += HandlePropertyChanged;
+            DataContext = gvm;
+        }
+
+        void HandleGuess(object sender, RoutedEventArgs e)
+        {
+            if(e.Source is LetterButton button && DataContext is GameViewModel gvm)
+            {
+               gvm.Guess(button.Letter);
+               e.Handled = true;
+            }
+        }
+
+        void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (DataContext is GameViewModel gvm)
+            {
+                if (e.PropertyName == "IsWon" && gvm.IsWon)
+                {
+                    DisplayWin();
+                }
+                if (e.PropertyName == "IsLost" && gvm.IsLost)
+                {
+                    DisplayLoss();
+                }
+            }
         }
 
         /// <summary>
@@ -32,7 +60,13 @@ namespace DependencyPropertyExercise.Components
         /// </summary>
         void Reset()
         {
-            // TODO: Reset the game
+            if(DataContext is GameViewModel oldgvm)
+            {
+                oldgvm.PropertyChanged -= HandlePropertyChanged;
+            }
+            var gvm = new GameViewModel();
+            gvm.PropertyChanged += HandlePropertyChanged;
+            DataContext = gvm;
         }
 
         /// <summary>

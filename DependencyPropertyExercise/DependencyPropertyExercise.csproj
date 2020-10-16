@@ -13,6 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LobsterPot">
+      <HintPath>LobsterPot.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\bubbles.png" />
     <Resource Include="Images\lobster.png" />
     <Resource Include="Images\pot.png" />
